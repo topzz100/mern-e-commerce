@@ -30,7 +30,7 @@ const Product = () => {
   useEffect(()=>{
     const getProduct = async() => {
       try{
-       const res = await axios.get(`http://localhost:7700/api/products/find/${location}`)
+       const res = await axios.get(`/api/products/find/${location}`)
         setProduct(res.data)
       }catch(err){
         console.log(err)
@@ -38,7 +38,7 @@ const Product = () => {
     }
     getProduct()
   }, [location])
-   //console.log(product)
+   console.log(product)
   // console.log(quantity);
   // console.log(color, size)
 

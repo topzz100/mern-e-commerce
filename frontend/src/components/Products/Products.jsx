@@ -123,7 +123,7 @@ const Products = ({category, filters, sort}) => {
         category?
         filteredProducts.map(product => {
           return <Product key = {product._id} product = {product}/>
-        }): allProducts.map((product) => (
+        }): products.map((product) => (
          <Product key={product._id} product = {product}/>
         ))
       }
