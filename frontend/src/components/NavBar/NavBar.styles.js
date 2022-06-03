@@ -29,6 +29,10 @@ export const Left = styled.div`
 `;
 export const LogoText = styled.h3`
   flex: 1;
+  a{
+    color: inherit;
+    text-decoration: none;
+  }
   /* width: 100%;
   display: flex;
   align-items: center;

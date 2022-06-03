@@ -22,7 +22,9 @@ const NavBar = () => {
           
         </Left>
         <LogoText>
-          ZOLE.
+          <Link to={'/'}>
+            ZOLE.
+          </Link>
         </LogoText>
         <Right>
           <Menu>
