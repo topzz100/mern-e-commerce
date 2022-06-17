@@ -7,7 +7,8 @@ import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom';
 
 const NavBar = () => {
-  // const cart = useSelector(selectCart)
+   const quantity = useSelector(state => state.cart.quantity)
+   console.log(quantity)
   return <>
     <Wrapper>
       <Content>
@@ -36,7 +37,7 @@ const NavBar = () => {
             </MenuItem>
             <MenuItem style={{marginRight: '20px'}}>
               <Link to= '/cart'>
-                <Badge badgeContent='2' color="primary">
+                <Badge badgeContent={quantity} color="primary">
                   <ShoppingCartOutlined/>
                 </Badge>
               </Link>

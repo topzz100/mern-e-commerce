@@ -7,7 +7,8 @@ import { ColorContainer, ColorTitle, ColorOption, Filter, Image, ImageContainer,
 import axios from 'axios'
 import { useLocation } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { addToCart, addTotal } from '../../redux/cartSlice'
+import { addToCart } from '../../redux/features/cart/cartSlice'
+// import { addToCart, addTotal } from '../../redux/cartSlice'
 
 const Product = () => {
     const location = useLocation().pathname.split('/')[2]
@@ -45,7 +46,7 @@ const Product = () => {
   const handleAddToCart = () => {
     const cartProduct = { ...product, quantity, color, size }
     dispatch(addToCart({cartProduct}))
-    dispatch(addTotal(product.price*quantity))
+    // dispatch(addTotal(product.price*quantity))
    
   }
   return (

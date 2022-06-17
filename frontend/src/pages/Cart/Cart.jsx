@@ -1,11 +1,38 @@
 import { Add, Remove } from '@mui/icons-material'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 import Announcement from '../../components/Announcement/Announcement'
 import Footer from '../../components/Footer/Footer'
 import NavBar from '../../components/NavBar/NavBar'
 import { Button, Content, Image, ImageContainer, InfoContainer, InfoContent, InfoPrice, Left, Right, SingleProduct, Info, InfoTitle, InfoText, Title, Top, TopLink, Wrapper, Color, PriceTag, PlusMinus, Amount, SumTitle, SumHeader, TotalBox, SumInfo, SumTotal, SumButton } from './Cart.styles'
+import StripeCheckout from 'react-stripe-checkout'
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 const Cart = () => {
+  const {products, total} = useSelector(state => state.cart)
+  const [stripeToken, setStripeToken] = useState(null);
+  const navigate = useNavigate()
+
+  const onToken = (token) => {
+    setStripeToken(token);
+  };  
+
+  useEffect(() => {
+    const makeRequest = async () => {
+      try {
+        const res = await axios.post("/api/checkout/payment", {
+          tokenId: stripeToken.id,
+          amount: total,
+        });
+        navigate('/')
+        console.log(res.data)
+      } catch {}
+    };
+    stripeToken && makeRequest();
+  }, [stripeToken, total, navigate]);
+
+
   return (
     <>
       <NavBar/>
@@ -28,7 +55,58 @@ const Cart = () => {
         </Top>
         <Content>
           <Left>
-            <SingleProduct>
+            {
+              products.map((product => (
+                <SingleProduct key={product._id}>
+                  <ImageContainer>
+                    <Image src={product.img}/>
+                  </ImageContainer>
+                  <InfoContainer>
+                    <InfoContent>
+                      <Info>
+                        <InfoTitle>
+                          Product:
+                        </InfoTitle>
+                        <InfoText>
+                          {product.title}
+                        </InfoText>
+                      </Info>
+                      <Info>
+                        <InfoTitle>
+                          ID:
+                        </InfoTitle>
+                        <InfoText>
+                          {product._Id}
+                        </InfoText>
+                      </Info>
+                      
+                      
+                      <Color color = {product?.color}/>
+                        <Info>
+                          <InfoTitle>
+                            Size:
+                          </InfoTitle>
+                          <InfoText>
+                            {product?.size}
+                          </InfoText>
+                        </Info>
+                    </InfoContent>
+                    <InfoPrice>
+                      <PlusMinus>
+                        <Add/>
+                        <Amount>{product.quantity}</Amount>
+                        <Remove/>
+                      </PlusMinus>
+                      <PriceTag>
+                        $50.00
+                      </PriceTag>
+                    </InfoPrice>
+                  </InfoContainer>
+                </SingleProduct>
+              )))
+            }
+            <hr />
+            {/* <SingleProduct>
               <ImageContainer>
                 <Image src='https://d3o2e4jr3mxnm3.cloudfront.net/Rocket-Vintage-Chill-Cap_66374_1_lg.png'/>
               </ImageContainer>
@@ -120,7 +198,7 @@ const Cart = () => {
                   </PriceTag>
                 </InfoPrice>
               </InfoContainer>
-            </SingleProduct>
+            </SingleProduct> */}
 
           </Left>
           <Right>
@@ -133,7 +211,7 @@ const Cart = () => {
                   SubTotal
                 </SumTitle>
                 <SumTitle>
-                  $ 80.00
+                  {total}
                 </SumTitle>
               </SumInfo>
               <SumInfo>
@@ -157,13 +235,26 @@ const Cart = () => {
                   Total
                 </SumTotal>
                 <SumTotal>
-                  $ 90.00
+                  ${total}
                 </SumTotal>
               </SumInfo>
             </TotalBox>
-            <SumButton>
+
+            <StripeCheckout
+              name="Zole"
+              image="https://avatars.githubusercontent.com/u/1486366?v=4"
+              billingAddress
+              shippingAddress
+              description={`Your total is $${total}`}
+              amount={total}
+              token={onToken}
+              stripeKey={process.env.REACT_APP_STRIPE}
+            >
+              <SumButton>
               CHECKOUT NOW
             </SumButton>
+            </StripeCheckout>
+            
           </Right>
         </Content>
         
