@@ -15,6 +15,9 @@ const cartSlice=(createSlice({
     } ,
     addTotal: (state, action)=>{
       state.cartTotal += action.payload
+    },
+    reset: (state)=>{
+      initialState
     }
   }
 }))

@@ -1,6 +1,6 @@
 import { Add, Remove } from '@mui/icons-material'
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import Announcement from '../../components/Announcement/Announcement'
 import Footer from '../../components/Footer/Footer'
 import NavBar from '../../components/NavBar/NavBar'
@@ -8,12 +8,14 @@ import { Button, Content, Image, ImageContainer, InfoContainer, InfoContent, Inf
 import StripeCheckout from 'react-stripe-checkout'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import { reset } from '../../redux/features/cart/cartSlice'
 
-const KEY ='pk_test_51LBMbSAdnWCw92xfUvTfmvzGq7clwgqmgng0kNFszxBZ5Inr76HMr6XWv6cW2cvQpakAVaUzEvcPCRLTSbnUKNlc007S3Vteq9'
+const KEY =process.env.REACT_APP_STRIPE
 const Cart = () => {
   const {products, total} = useSelector(state => state.cart)
   const [stripeToken, setStripeToken] = useState(null);
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const onToken = (token) => {
     setStripeToken(token);
@@ -26,12 +28,13 @@ const Cart = () => {
           tokenId: stripeToken.id,
           amount: total,
         });
-        navigate('/success')
+        res.data && dispatch(reset)
+        res.data && navigate('/success')
         console.log(res.data)
       } catch {}
     };
     stripeToken && makeRequest();
-  }, [stripeToken, total, navigate]);
+  }, [stripeToken, total, navigate, reset]);
 
 
   return (

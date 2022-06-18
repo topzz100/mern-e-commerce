@@ -70,9 +70,10 @@ export const Menu = styled.div`
  
 `;
 export const MenuItem = styled.h4`
-  font-weight: 500;
+  font-weight: 600;
   font-size: .9rem;
   margin-left: 20px;
+  cursor: pointer;
   ${mobile({ marginLeft: '10px', fontSize: '.8rem' })} 
 `;
 
