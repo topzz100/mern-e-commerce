@@ -9,6 +9,7 @@ import StripeCheckout from 'react-stripe-checkout'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 
+const KEY ='pk_test_51LBMbSAdnWCw92xfUvTfmvzGq7clwgqmgng0kNFszxBZ5Inr76HMr6XWv6cW2cvQpakAVaUzEvcPCRLTSbnUKNlc007S3Vteq9'
 const Cart = () => {
   const {products, total} = useSelector(state => state.cart)
   const [stripeToken, setStripeToken] = useState(null);
@@ -25,7 +26,7 @@ const Cart = () => {
           tokenId: stripeToken.id,
           amount: total,
         });
-        navigate('/')
+        navigate('/success')
         console.log(res.data)
       } catch {}
     };
@@ -76,7 +77,7 @@ const Cart = () => {
                           ID:
                         </InfoTitle>
                         <InfoText>
-                          {product._Id}
+                          {product._id}
                         </InfoText>
                       </Info>
                       
@@ -98,7 +99,7 @@ const Cart = () => {
                         <Remove/>
                       </PlusMinus>
                       <PriceTag>
-                        $50.00
+                        ${product.price}
                       </PriceTag>
                     </InfoPrice>
                   </InfoContainer>
@@ -219,7 +220,7 @@ const Cart = () => {
                   Estimated Shipping
                 </SumTitle>
                 <SumTitle>
-                  $ 5.90
+                  $0.00
                 </SumTitle>
               </SumInfo>
               <SumInfo>
@@ -227,7 +228,7 @@ const Cart = () => {
                   Shipping Discount
                 </SumTitle>
                 <SumTitle>
-                  - $ 8.00
+                  $0.00
                 </SumTitle>
               </SumInfo>
               <SumInfo>
@@ -246,9 +247,9 @@ const Cart = () => {
               billingAddress
               shippingAddress
               description={`Your total is $${total}`}
-              amount={total}
+              amount={total * 100}
               token={onToken}
-              stripeKey={process.env.REACT_APP_STRIPE}
+              stripeKey={KEY}
             >
               <SumButton>
               CHECKOUT NOW

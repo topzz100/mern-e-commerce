@@ -7,6 +7,7 @@ import Home from './pages/Home/Home.jsx';
 import Login from './pages/Login/Login';
 import Product from './pages/Product/Product';
 import Register from './pages/Register/Register';
+import Success from './pages/Success/Success';
 
 function App() {
   const { user } = useSelector((state) => state.auth)
@@ -17,6 +18,7 @@ function App() {
         <Route path='/products/:category' element={ user?<FilterProducts/> : <Register/>}/>
         <Route path='/product/:id' element={ user? <Product/> : <Register/>}/>
         <Route path='/cart' element={user? <Cart/> : <Register/>}/>
+        <Route path='/success' element={ user? <Success/> : <Register/>}/>
         <Route path='/register' element={<Register/>}/>
         <Route path='/login' element={<Login/>}/>
       </Routes>
