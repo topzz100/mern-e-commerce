@@ -19,8 +19,9 @@ const Slider = () => {
       <ArrowLeftOutlined/>
     </Arrow>
       <Slide indexVal = {indexVal}>
-         {sliderItems.map(item => {
-        return(
+        {
+          sliderItems.map(item => {
+          return(
           
           <Content bg = {item.bg} key= {item.id}>
             <ImageContainer>
@@ -45,9 +46,6 @@ const Slider = () => {
       })}
       </Slide>
      
-     
-    
-
     <Arrow position = 'right' onClick = {() => handleClick('right')}>
       <ArrowRightOutlined/>
     </Arrow>

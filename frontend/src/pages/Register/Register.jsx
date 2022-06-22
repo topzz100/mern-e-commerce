@@ -59,12 +59,36 @@ const Register = () => {
           </Title>
           <Form onSubmit={handleRegister}>
             <InputWrapper>
-              <Input type= 'text' placeholder='first name' ref = {firstNameRef}/>
-              <Input type= 'text' placeholder='last name' ref = {lastNameRef}/>
-              <Input type= 'text' placeholder='usernname' ref = {userNameRef}/>
-              <Input type= 'email' placeholder='email' ref = {emailRef}/>
-              <Input type= 'password' placeholder='confirm' ref = {passwordRef}/>
-              <Input type= 'password' placeholder='confirm password' ref = {cPasswordRef}/>
+              <Input 
+                type= 'text' 
+                placeholder='first name' 
+                ref = {firstNameRef}
+              />
+              <Input 
+                type= 'text' 
+                placeholder='last name' 
+                ref = {lastNameRef}
+              />
+              <Input 
+                type= 'text' 
+                placeholder='usernname' 
+                ref = {userNameRef}
+              />
+              <Input 
+                type= 'email' 
+                placeholder='email' 
+                ref = {emailRef}
+              />
+              <Input 
+                type= 'password' 
+                placeholder='confirm' 
+                ref = {passwordRef}
+              />
+              <Input 
+                type= 'password' 
+                placeholder='confirm password' 
+                ref = {cPasswordRef}
+              />
             </InputWrapper>
             <Text>
               By creating an account, I consent to the processing of my personal data in accordance with the <b>PRIVACY POLICY</b>

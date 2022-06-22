@@ -1,7 +1,6 @@
 import { Search, ShoppingCartOutlined } from '@mui/icons-material';
 import { Badge } from '@mui/material';
 import React from 'react';
-// import { selectCart } from '../../redux/cartSlice';
 import { Content, InputField, Left, LogoText, Menu, MenuItem, Right, Wrapper } from './NavBar.styles';
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom';
@@ -15,8 +14,6 @@ const NavBar = () => {
    const handleLogOut = () => {
     dispatch(logout())
      sessionStorage.removeItem('user')
-   
-    console.log('logOut')
    }
   return <>
     <Wrapper>
@@ -26,7 +23,9 @@ const NavBar = () => {
             EN
           </h4>
           <InputField>
-            <input type="text" placeholder='Search'/>
+            <input 
+            type="text" 
+            placeholder='Search'/>
             <Search style={{fontSize: ".9rem"}}/>
           </InputField>
           
@@ -38,10 +37,8 @@ const NavBar = () => {
         </LogoText>
         <Right>
           <Menu>
-            {/* <MenuItem>
-              REGISTER
-            </MenuItem> */}
-            <MenuItem onClick={handleLogOut}>
+            <MenuItem 
+            onClick={handleLogOut}>
               LOG OUT
             </MenuItem>
             <MenuItem style={{marginRight: '20px'}}>

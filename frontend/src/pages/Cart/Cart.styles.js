@@ -44,6 +44,7 @@ export const SingleProduct = styled.div`
   display: flex;
   align-items: center;
   padding: 15px 0;
+  position: relative;
   ${mobile({ flexDirection: 'column', alignItems: 'flexStart'})}
 
 `;
@@ -146,7 +147,17 @@ export const SumButton = styled.button`
   background-color: black;
   color: white;
   padding: 8px;
+  animation: 1s ease-in;
+  :hover{
+    letter-spacing: 5px;
+    font-weight: 600;
+  }
    /* display: flex;
   justify-content: center;
   align-items: center; */
 `;
+export const DeleteProduct = styled.div`
+  position: absolute;
+  top: 5px;
+  right: 5px;
+`

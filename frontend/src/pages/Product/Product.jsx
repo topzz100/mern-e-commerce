@@ -8,15 +8,15 @@ import axios from 'axios'
 import { useLocation } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { addToCart } from '../../redux/features/cart/cartSlice'
-// import { addToCart, addTotal } from '../../redux/cartSlice'
+
 
 const Product = () => {
-    const location = useLocation().pathname.split('/')[2]
+  const location = useLocation().pathname.split('/')[2]
   const[product, setProduct] =useState(null)
   const[quantity, setQuantity] = useState(1)
-  const [size, setSize] = useState(null)
-   const [color, setColor] = useState(product?.color[0])
-   const dispatch = useDispatch()
+  const [size, setSize] = useState(product?.size[0])
+  const [color, setColor] = useState(product?.color[0])
+  const dispatch = useDispatch()
 
 
   const handleQuantity = (dir) => {
@@ -44,7 +44,7 @@ const Product = () => {
   // console.log(color, size)
 
   const handleAddToCart = () => {
-    const cartProduct = { ...product, quantity, color, size }
+    const cartProduct = { ...product, quantity, color: color || product?.color[0], size: size || product?.size[0] }
     dispatch(addToCart({cartProduct}))
     // dispatch(addTotal(product.price*quantity))
    
@@ -74,12 +74,14 @@ const Product = () => {
             </ColorTitle>
             {
             product?.color.map((c, i) => 
-              <ColorOption color={c} key={i} onClick={()=>setColor(c)} style={{ transform: c===color && 'scale(1.5)'}}/>)
+              <ColorOption 
+                color={c} 
+                key={i} 
+                onClick={()=>setColor(c)} 
+                style={{ transform: c===color && 'scale(1.5)'}}
+                />
+              )
             }
-             {/* <ColorOption color='blue'/>
-             <ColorOption color='brown'/>
-             <ColorOption color='purple'/> */}
-
           </ColorContainer>
           <SelectCon>
             <SelectTitle>
@@ -87,16 +89,11 @@ const Product = () => {
             </SelectTitle>
            
             <Select onClick= {(e)=> {setSize(e.target.value)}}>
-            <Option  disabled selected>XS</Option>
             {
               product?.size.map((s, i) => 
-              <Option key= {i} >{s}</Option>
-                )
+                <Option key= {i} >{s}</Option>
+              )
             }
-            {/* <Option>S</Option>
-            <Option>M</Option>
-            <Option>L</Option>
-            <Option>XL</Option> */}
             </Select>
           </SelectCon>
         </Filter>
@@ -105,7 +102,7 @@ const Product = () => {
             <Remove onClick ={()=>handleQuantity('left')}/>
             <Amount>{quantity}</Amount>
             <Add onClick ={()=>handleQuantity('right')}/>
-          </PlusMinus>
+          </ PlusMinus>
           <Button onClick={handleAddToCart}>
             ADD TO CART
           </Button>

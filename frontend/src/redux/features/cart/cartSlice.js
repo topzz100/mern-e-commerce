@@ -16,6 +16,13 @@ export const userSlice = createSlice({
       state.quantity += 1;
       state.total += action.payload.cartProduct.price * action.payload.cartProduct.quantity;
     },
+    updateCart:(state, action) =>{
+      state.products = action.payload.cartProducts
+      state.quantity = action.payload.cartProducts.length
+      state.total = action.payload.cartProducts.reduce((total, p)=>
+        total + p.price*p.quantity
+      , 0)
+    },
     reset: (state) => {
       state.products = [];
       state.quantity = 0;
@@ -24,7 +31,7 @@ export const userSlice = createSlice({
   }
 });
 
-export const { addToCart, reset } = userSlice.actions;
+export const { addToCart, reset, updateCart } = userSlice.actions;
 
 
 

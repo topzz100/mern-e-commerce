@@ -42,8 +42,16 @@ const Login = () => {
           </Title>
           <Form onSubmit={handleLogin}>
             <InputWrapper>
-              <Input type= 'text' placeholder='username' ref={usernameRef}/>
-              <Input type= 'password' placeholder='password' ref={passwordRef}/>
+              <Input 
+                type= 'text' 
+                placeholder='username' 
+                ref={usernameRef}
+              />
+              <Input 
+                type= 'password' 
+                placeholder='password' 
+                ref={passwordRef}
+              />
               
             </InputWrapper>
             
@@ -56,12 +64,7 @@ const Login = () => {
               <p>CREATE NEW ACCOUNT</p>
               </Link>
             </Links>
-{/*             
-            <Links>
-              <Link href='#'>FOGET PASSWORD?</Link>
-              <Link href='#'>CREATE A NEW ACCOUNT</Link>
-            </Links> */}
-            
+           
           </Form>
         </Content>
 

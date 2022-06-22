@@ -1,25 +1,45 @@
-import { Add, Remove } from '@mui/icons-material'
+import { Add, Delete, Remove } from '@mui/icons-material'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Announcement from '../../components/Announcement/Announcement'
 import Footer from '../../components/Footer/Footer'
 import NavBar from '../../components/NavBar/NavBar'
-import { Button, Content, Image, ImageContainer, InfoContainer, InfoContent, InfoPrice, Left, Right, SingleProduct, Info, InfoTitle, InfoText, Title, Top, TopLink, Wrapper, Color, PriceTag, PlusMinus, Amount, SumTitle, SumHeader, TotalBox, SumInfo, SumTotal, SumButton } from './Cart.styles'
+import { Button, Content, Image, ImageContainer, InfoContainer, InfoContent, InfoPrice, Left, Right, SingleProduct, Info, InfoTitle, InfoText, Title, Top, TopLink, Wrapper, Color, PriceTag, PlusMinus, Amount, SumTitle, SumHeader, TotalBox, SumInfo, SumTotal, SumButton, DeleteProduct } from './Cart.styles'
 import StripeCheckout from 'react-stripe-checkout'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
-import { reset } from '../../redux/features/cart/cartSlice'
+import { reset, updateCart } from '../../redux/features/cart/cartSlice'
 
 const KEY =process.env.REACT_APP_STRIPE
 const Cart = () => {
   const {products, total} = useSelector(state => state.cart)
-  const [stripeToken, setStripeToken] = useState(null);
+  // const[quantity, setQuantity] = useState(null)
+  const [cartProducts, setCartProducts] = useState(products)
+  const [stripeToken, setStripeToken] = useState(0);
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
   const onToken = (token) => {
     setStripeToken(token);
   };  
+
+  const handleRemove = (c) => {
+    setCartProducts((prev)=>{
+      return prev.filter(p => p !== c)
+    })
+  }
+  
+  //   const handleQuantity = (dir) => {
+  //   if(dir==='left'){
+  //     quantity > 0 && setQuantity(quantity-1)
+  //   }
+  //   if(dir==='right'){
+  //     setQuantity(quantity+1)
+  //   }
+  // }
+  useEffect(()=>{
+    dispatch(updateCart({cartProducts}))
+  },[cartProducts, updateCart])
 
   useEffect(() => {
     const makeRequest = async () => {
@@ -60,32 +80,33 @@ const Cart = () => {
         <Content>
           <Left>
             {
-              products.map((product => (
-                <SingleProduct key={product._id}>
-                  <ImageContainer>
-                    <Image src={product.img}/>
-                  </ImageContainer>
-                  <InfoContainer>
-                    <InfoContent>
-                      <Info>
-                        <InfoTitle>
-                          Product:
-                        </InfoTitle>
-                        <InfoText>
-                          {product.title}
-                        </InfoText>
-                      </Info>
-                      <Info>
-                        <InfoTitle>
-                          ID:
-                        </InfoTitle>
-                        <InfoText>
-                          {product._id}
-                        </InfoText>
-                      </Info>
-                      
-                      
-                      <Color color = {product?.color}/>
+              cartProducts.map((product => (
+                <>
+                  <SingleProduct key={product._id}>
+                    <ImageContainer>
+                      <Image src={product.img}/>
+                    </ImageContainer>
+                    <InfoContainer>
+                      <InfoContent>
+                        <Info>
+                          <InfoTitle>
+                            Product:
+                          </InfoTitle>
+                          <InfoText>
+                            {product.title}
+                          </InfoText>
+                        </Info>
+                        <Info>
+                          <InfoTitle>
+                            ID:
+                          </InfoTitle>
+                          <InfoText>
+                            {product._id}
+                          </InfoText>
+                        </Info>
+                        
+                        
+                        <Color color = {product?.color}/>
                         <Info>
                           <InfoTitle>
                             Size:
@@ -94,117 +115,28 @@ const Cart = () => {
                             {product?.size}
                           </InfoText>
                         </Info>
-                    </InfoContent>
-                    <InfoPrice>
-                      <PlusMinus>
-                        <Add/>
-                        <Amount>{product.quantity}</Amount>
-                        <Remove/>
-                      </PlusMinus>
-                      <PriceTag>
-                        ${product.price}
-                      </PriceTag>
-                    </InfoPrice>
-                  </InfoContainer>
-                </SingleProduct>
+                      </InfoContent>
+                      <InfoPrice>
+                        <PlusMinus>
+                          {/* <Remove onClick ={()=>handleQuantity('left')}/> */}
+                          <Amount>{ product.quantity}</Amount>
+                          {/* <Add onClick ={()=>handleQuantity('left')}/> */}
+                        </PlusMinus>
+                        <PriceTag>
+                          ${product.price}
+                        </PriceTag>
+                      </InfoPrice>
+                    </InfoContainer>
+                    <DeleteProduct onClick={() => handleRemove(product)}>
+                      <Delete/>
+                    </DeleteProduct>
+                  </SingleProduct>
+                  <hr />
+                </>
               )))
             }
-            <hr />
-            {/* <SingleProduct>
-              <ImageContainer>
-                <Image src='https://d3o2e4jr3mxnm3.cloudfront.net/Rocket-Vintage-Chill-Cap_66374_1_lg.png'/>
-              </ImageContainer>
-              <InfoContainer>
-                <InfoContent>
-                  <Info>
-                    <InfoTitle>
-                      Product:
-                    </InfoTitle>
-                    <InfoText>
-                      VINTAGE CAP
-                    </InfoText>
-                  </Info>
-                  <Info>
-                    <InfoTitle>
-                      ID:
-                    </InfoTitle>
-                    <InfoText>
-                      54629736792
-                    </InfoText>
-                  </Info>
-                   
-                  
-                  <Color color = 'gray'/>
-                    <Info>
-                      <InfoTitle>
-                        Size:
-                      </InfoTitle>
-                      <InfoText>
-                        41
-                      </InfoText>
-                    </Info>
-                </InfoContent>
-                <InfoPrice>
-                  <PlusMinus>
-                    <Add/>
-                    <Amount>1</Amount>
-                    <Remove/>
-                  </PlusMinus>
-                  <PriceTag>
-                    $50.00
-                  </PriceTag>
-                </InfoPrice>
-              </InfoContainer>
-            </SingleProduct>
-            <hr />
-            <SingleProduct>
-              <ImageContainer>
-                <Image src='https://www.pngarts.com/files/3/Women-Jacket-PNG-High-Quality-Image.png'/>
-              </ImageContainer>
-              <InfoContainer>
-                <InfoContent>
-                  <Info>
-                    <InfoTitle>
-                      Product:
-                    </InfoTitle>
-                    <InfoText>
-                      VINTAGE CAP
-                    </InfoText>
-                  </Info>
-                  <Info>
-                    <InfoTitle>
-                      ID:
-                    </InfoTitle>
-                    <InfoText>
-                      54629736792
-                    </InfoText>
-                  </Info>
-                   
-                  
-                  <Color color = 'gray'/>
-                    <Info>
-                      <InfoTitle>
-                        Size:
-                      </InfoTitle>
-                      <InfoText>
-                        41
-                      </InfoText>
-                    </Info>
-                </InfoContent>
-                <InfoPrice>
-                  <PlusMinus>
-                    <Add/>
-                    <Amount>1</Amount>
-                    <Remove/>
-                  </PlusMinus>
-                  <PriceTag>
-                    $50.00
-                  </PriceTag>
-                </InfoPrice>
-              </InfoContainer>
-            </SingleProduct> */}
-
           </Left>
+          
           <Right>
             <SumHeader>
               ORDER SUMMARY

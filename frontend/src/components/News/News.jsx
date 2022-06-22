@@ -13,7 +13,9 @@ const News = () => {
           Get timely updates from your favorite products.
         </Text>
         <InputContainer>
-          <Input type= 'email' placeholder='Your email'/>
+          <Input 
+          type= 'email' 
+          placeholder='Your email'/>
           <Button>
             <SendOutlined style={{color: 'white'}}/>
           </Button>

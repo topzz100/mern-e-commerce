@@ -12,10 +12,18 @@ const Footer = () => {
             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nesciunt porro placeat vitae numquam libero quia, veritatis sapiente at quis nulla maxime iusto consequuntur omnis itaque quasi amet aliquid nihil? Saepe!
           </p>
           <ul>
-            <li style={{backgroundColor: 'blue'}}><Facebook style={{color: 'white' }} /></li>
-            <li style={{backgroundColor: 'red'}}><Instagram style={{color: 'white'}}/></li>
-            <li style={{backgroundColor: 'orange'}}><Twitter style={{color: 'white'}}/></li>
-            <li style={{backgroundColor: 'green'}}><Pinterest style={{color: 'white'}}/></li>
+            <li style={{backgroundColor: 'blue'}}>
+              <Facebook style={{color: 'white' }} />
+            </li>
+            <li style={{backgroundColor: 'red'}}>
+              <Instagram style={{color: 'white'}}/>
+            </li>
+            <li style={{backgroundColor: 'orange'}}>
+              <Twitter style={{color: 'white'}}/>
+            </li>
+            <li style={{backgroundColor: 'green'}}>
+              <Pinterest style={{color: 'white'}}/>
+            </li>
           </ul>
         </Left>
         <Center>
@@ -42,9 +50,18 @@ const Footer = () => {
           <h3>Contact</h3>
 
           <ul>
-            <li><LocationOn style={{fontSize: '1rem', marginRight: '15px'}}/> 662, Dixie Stret, Lorem, ipsum dolor.</li>
-            <li><Phone style={{fontSize: '1rem', marginRight: '15px'}}/> +222 565748356</li>
-            <li> <MailOutline style={{fontSize: '1rem', marginRight: '15px'}}/> contactu@zola.com</li>
+            <li>
+              <LocationOn style={{fontSize: '1rem', marginRight: '15px'}}/>
+               662, Dixie Stret, Lorem, ipsum dolor.
+            </li>
+            <li>
+              <Phone style={{fontSize: '1rem', marginRight: '15px'}}/> 
+              +222 565748356
+            </li>
+            <li> 
+              <MailOutline style={{fontSize: '1rem', marginRight: '15px'}}/> 
+              contactu@zola.com
+            </li>
             
           </ul>
           <img src="https://i.ibb.co/Qfvn4z6/payment.png" alt="" />

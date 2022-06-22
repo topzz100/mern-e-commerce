@@ -36,25 +36,25 @@ const FilterProducts = () => {
               Filter Products:
             </Title>
             <Select defaultValue='Color' name="color" onChange={handleFilters} >
-            <Option disabled >
-              Color
-            </Option>
-            <Option>white</Option>
-            <Option>black</Option>
-            <Option>red</Option>
-            <Option>blue</Option>
-            <Option>yellow</Option>
-            <Option>green</Option>
-          </Select>
+              <Option disabled >
+                Color
+              </Option>
+              <Option>white</Option>
+              <Option>black</Option>
+              <Option>red</Option>
+              <Option>blue</Option>
+              <Option>yellow</Option>
+              <Option>green</Option>
+            </Select>
             <Select defaultValue='Size' name= "size" onChange={handleFilters}>
-            <Option disabled>
-              Size
-            </Option>
-            <Option>XS</Option>
-            <Option>S</Option>
-            <Option>M</Option>
-            <Option>L</Option>
-            <Option>XL</Option>
+              <Option disabled>
+                Size
+              </Option>
+              <Option>XS</Option>
+              <Option>S</Option>
+              <Option>M</Option>
+              <Option>L</Option>
+              <Option>XL</Option>
           </Select>
           </Left>
           <Right>
