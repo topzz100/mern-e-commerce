@@ -4,6 +4,7 @@ const dotenv = require('dotenv').config()
 const connectDB = require('./connect')
 const notFound = require('./middleware/notFound')
 const errorHandlerMiddleware = require('./middleware/errorHandler')
+const path = require('path')
 const morgan = require('morgan')
 const cors = require('cors');
 
