@@ -27,6 +27,7 @@ const Cart = () => {
     setCartProducts((prev)=>{
       return prev.filter(p => p !== c)
     })
+    dispatch(updateCart({cartProducts}))
   }
   
   //   const handleQuantity = (dir) => {
@@ -37,20 +38,21 @@ const Cart = () => {
   //     setQuantity(quantity+1)
   //   }
   // }
-  useEffect(()=>{
-    dispatch(updateCart({cartProducts}))
-  },[cartProducts, updateCart])
+  // useEffect(()=>{
+  //   dispatch(updateCart({cartProducts}))
+  // },[cartProducts, updateCart])
 
   useEffect(() => {
     const makeRequest = async () => {
       try {
         const res = await axios.post("/api/checkout/payment", {
-          tokenId: stripeToken.id,
-          amount: total,
+          tokenId: stripeToken .id,
+          amount: parseInt(total),
         });
+        console.log(res)
+        res.data && dispatch(reset())
         res.data && navigate('/success')
-         res.data && dispatch(reset)
-        console.log(res.data)
+       
       } catch {}
     };
     stripeToken && makeRequest();
