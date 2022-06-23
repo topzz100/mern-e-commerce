@@ -48,8 +48,8 @@ const Cart = () => {
           tokenId: stripeToken.id,
           amount: total,
         });
-        res.data && dispatch(reset)
         res.data && navigate('/success')
+         res.data && dispatch(reset)
         console.log(res.data)
       } catch {}
     };
