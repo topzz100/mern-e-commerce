@@ -99,5 +99,9 @@ export const Button = styled.button`
   padding: 12px;
   background-color: white;
   border: 1px solid black;
+  transition: 0.3s ease-in-out;
+  :hover{ 
+    font-weight: 600;
+  }
 `;
 

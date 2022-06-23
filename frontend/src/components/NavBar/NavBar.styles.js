@@ -74,6 +74,12 @@ export const MenuItem = styled.h4`
   font-size: .9rem;
   margin-left: 20px;
   cursor: pointer;
+  transition: 0.3s ease-in-out;
   ${mobile({ marginLeft: '10px', fontSize: '.8rem' })} 
+  transition: 0.3s ease-in-out;
+  :hover{ 
+    font-weight: 700;
+    letter-spacing: 2px;
+  }
 `;
 

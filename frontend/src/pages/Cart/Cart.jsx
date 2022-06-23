@@ -7,7 +7,7 @@ import NavBar from '../../components/NavBar/NavBar'
 import { Button, Content, Image, ImageContainer, InfoContainer, InfoContent, InfoPrice, Left, Right, SingleProduct, Info, InfoTitle, InfoText, Title, Top, TopLink, Wrapper, Color, PriceTag, PlusMinus, Amount, SumTitle, SumHeader, TotalBox, SumInfo, SumTotal, SumButton, DeleteProduct } from './Cart.styles'
 import StripeCheckout from 'react-stripe-checkout'
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { reset, updateCart } from '../../redux/features/cart/cartSlice'
 
 const KEY =process.env.REACT_APP_STRIPE
@@ -66,16 +66,31 @@ const Cart = () => {
           YOUR BAG
         </Title>
         <Top>
-          <Button bgcolor= 'transparent' color = 'inherit'>
-            CONTINUE SHOPPING
-          </Button>
+          <Link to={'/'}>
+            <Button bgcolor= 'transparent' color = 'inherit'>
+              CONTINUE SHOPPING
+            </Button>
+          </Link>
+          
           <TopLink>
             <a href= '#'>Shopping bag (2)</a>
             <a href = '#'>Wishlist (0)</a>
           </TopLink>
-          <Button bgcolor= 'black' color ='white'>
-            CHECKOUT NOW
-          </Button>
+          <StripeCheckout
+            name="Zole"
+            image="https://avatars.githubusercontent.com/u/1486366?v=4"
+            billingAddress
+            shippingAddress
+            description={`Your total is $${total}`}
+            amount={total * 100}
+            token={onToken}
+            stripeKey={KEY}
+          >
+            <Button bgcolor= 'black' color ='white'>
+              CHECKOUT NOW
+            </Button>
+          </StripeCheckout>
+          
         </Top>
         <Content>
           <Left>

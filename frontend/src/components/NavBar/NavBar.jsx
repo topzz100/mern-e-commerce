@@ -32,7 +32,7 @@ const NavBar = () => {
         </Left>
         <LogoText>
           <Link to={'/'}>
-            ZOLE.
+            ZOLE<span style={{color: 'red', fontSize: '3rem'}}>.</span>
           </Link>
         </LogoText>
         <Right>

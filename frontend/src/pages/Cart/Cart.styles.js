@@ -16,12 +16,19 @@ export const Top = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
+  a{
+    color: inherit;
+  }
 `;
 export const Button = styled.button`
   padding: 8px;
   background-color: ${props => props.bgcolor};
   color: ${props => props.color};
   font-weight: 500;
+  transition: 0.3s ease-in-out;
+  :hover{ 
+    font-weight: 600;
+  }
 
 `;
 export const TopLink = styled.div`
@@ -147,9 +154,9 @@ export const SumButton = styled.button`
   background-color: black;
   color: white;
   padding: 8px;
-  animation: 1s ease-in;
+  transition: 0.5s ease-in;
   :hover{
-    letter-spacing: 5px;
+    letter-spacing: 3px;
     font-weight: 600;
   }
    /* display: flex;
